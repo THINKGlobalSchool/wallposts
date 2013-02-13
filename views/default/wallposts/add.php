@@ -1,6 +1,6 @@
 <?php
 /**
- * Elgg Wall Posts CSS
+ * Elgg Wall Posts Add View
  *
  * @package WallPosts
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
@@ -9,9 +9,7 @@
  * @link http://www.thinkglobalschool.com/
  *
  */
-?>
 
-textarea.wallpost-body {
-	height: 80px; 
-	padding: 8px;
-}
+$form = elgg_view_form('wallposts/add', array(), $vars);
+
+echo elgg_view_module('info', elgg_echo("wallposts:label:share"), $form);
