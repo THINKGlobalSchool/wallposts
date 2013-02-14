@@ -76,7 +76,7 @@ function wallposts_profile_tab_hander($hook, $type, $value, $params) {
 	// Remove comment wall
 	foreach ($value as $idx => $tab) {
 		if ($tab == 'commentwall') {
-			//unset($value[$idx]); // @todo disable
+			unset($value[$idx]);
 		}
 	}
 	return $value;
