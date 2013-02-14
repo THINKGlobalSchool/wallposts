@@ -21,7 +21,7 @@ $english = array(
 	// Page titles 
 
 	// Labels
-	'wallposts:label:share' => 'Something to say? Something to share? Go for it. WALL POSTS', // @todo
+	'wallposts:label:share' => 'Post to %s\'s wall', // @todo
 	'wallposts:label:tips' => 'Tip: Tag posts by putting a # in front of a word.',
 	'wallposts:label:activity' => 'Activity',
 	'wallposts:label:posts' => 'Wall Posts',

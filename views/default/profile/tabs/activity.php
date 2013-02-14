@@ -24,8 +24,8 @@ if (elgg_is_logged_in()) {
 
 $posts_content .= elgg_view('wallposts/list', array('owner_guid' => $page_owner->guid));
 
-echo elgg_view_module('featured', elgg_echo('wallposts:label:posts', array($page_owner->name)), $posts_content);
+echo elgg_view_module('featured', elgg_echo('wallposts:label:ownerposts', array($page_owner->name)), $posts_content);
 
 $river_content = elgg_view('wallposts/activity', array('user_guid' => $page_owner->guid));
 
-echo elgg_view_module('featured', elgg_echo('wallposts:label:activity', array($page_owner->name)), $river_content);
+echo elgg_view_module('featured', elgg_echo('wallposts:label:owneractivity', array($page_owner->name)), $river_content);

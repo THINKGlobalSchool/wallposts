@@ -23,18 +23,20 @@ $subject_link = elgg_view('output/url', array(
 	'is_trusted' => true,
 ));
 
+$container = $object->getContainerEntity();
+
 if ($subject->guid == $object->container_guid) {
 	$wall_text = elgg_echo('wallposts:their');
 } else {
-	$container = $object->getContainerEntity();
 	$wall_text = $container->name . "'s";
-	$wall_text = elgg_view('output/url', array(
-		'href' => $container->getURL(),
-		'text' => $wall_text,
-		'class' => 'elgg-river-object',
-		'is_trusted' => true,
-	));
 }
+
+$wall_text = elgg_view('output/url', array(
+	'href' => $container->getURL(),
+	'text' => $wall_text,
+	'class' => 'elgg-river-object',
+	'is_trusted' => true,
+));
 
 $summary = elgg_echo("river:create:object:wallpost", array($subject_link, $wall_text));
 

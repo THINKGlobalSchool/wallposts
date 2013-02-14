@@ -10,6 +10,8 @@
  *
  */
 
+$page_owner = elgg_get_page_owner_entity();
+
 $form = elgg_view_form('wallposts/add', array(), $vars);
 
-echo elgg_view_module('info', elgg_echo("wallposts:label:share"), $form);
+echo elgg_view_module('info', elgg_echo("wallposts:label:share", array($page_owner->name)), $form);
