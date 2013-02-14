@@ -33,7 +33,7 @@ if ($subject->guid == $object->container_guid) {
 
 $wall_text = elgg_view('output/url', array(
 	'href' => $container->getURL(),
-	'text' => $wall_text,
+	'text' => $wall_text . "&nbsp;" . elgg_echo('wallposts:wall'),
 	'class' => 'elgg-river-object',
 	'is_trusted' => true,
 ));
@@ -44,5 +44,4 @@ echo elgg_view('river/elements/layout', array(
 	'item' => $vars['item'],
 	'message' => $excerpt,
 	'summary' => $summary,
-	//'responses' => elgg_view('wallposts/responses', array('item' => $vars['item'])),
 ));

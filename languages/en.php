@@ -17,6 +17,7 @@ $english = array(
 	'wallposts:for' => "For: ",
 	'wallposts:their' => "their own",
 	'item:object:wallposts' => 'Wall Posts',
+	'wallposts:wall' => 'wall',
 
 	// Page titles 
 
@@ -74,7 +75,7 @@ You cannot reply to this email.",
 
 	// River
 	'river:comment:object:wallpost' => '%s commented on a wall post',
-	'river:create:object:wallpost' => "%s posted to %s wall",
+	'river:create:object:wallpost' => "%s posted to %s",
 	'river:comments:wallposts:more' => "+%s more comments",
 );
 
