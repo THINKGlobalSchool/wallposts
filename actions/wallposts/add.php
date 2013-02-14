@@ -38,14 +38,5 @@ if (!$guid) {
 	forward(REFERER);
 }
 
-// @todo notifications
-
-// Send response to original poster if not already registered to receive notification
-// if ($parent_guid) {
-// 	thewire_send_response_notification($guid, $parent_guid, $user);
-// 	$parent = get_entity($parent_guid);
-// 	forward("thewire/thread/$parent->wire_thread");
-// }
-
-system_message(elgg_echo("wallposts:success:create"));
+system_message(elgg_echo("wallposts:success:create", array($container->name)));
 forward(REFERER);

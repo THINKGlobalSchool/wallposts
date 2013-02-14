@@ -15,3 +15,8 @@ textarea.wallpost-body {
 	height: 80px; 
 	padding: 8px;
 }
+
+.wallposts-river-more {
+	clear: both;
+	border-radius: 5px 0px 5px 5px;
+}

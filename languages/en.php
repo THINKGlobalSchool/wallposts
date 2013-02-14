@@ -29,13 +29,45 @@ $english = array(
 	'wallposts:label:ownerposts' => '%s\'s Wall Posts',
 
 	// Notifications
+	'wallposts:generic_comment:email:body' => "You have a new wall comment from %s. It reads:
+
+%s
+
+
+To view your wall, click here:
+
+%s
+
+To view %s's profile, click here:
+
+%s
+
+You cannot reply to this email.",
+
+	'wallposts:create:email:subject' => "You have a new wall post!",
+
+	'wallposts:create:email:body' => "You have a new wall post from %s. It reads:
+
+%s
+
+
+To view your wall, click here:
+
+%s
+
+To view %s's profile, click here:
+
+%s
+
+You cannot reply to this email.",
+
 
 	// Messages
 	'wallposts:success:create' => 'Successfully posted to %s\'s wall',
 	'wallposts:success:delete' => 'Successfully deleted wall post',
 
 	'wallposts:blank' => 'Sorry, you need to enter some text before we can post this',
-	'wallposts:none' => 'None',
+	'wallposts:none' => 'No one has posted on %s\'s wall',
 	'wallposts:error:create' => 'There was an error creating the wall post',
 	'wallposts:error:delete' => 'There was an error deleting the wall post',
 
@@ -43,6 +75,7 @@ $english = array(
 	// River
 	'river:comment:object:wallpost' => '%s commented on a wall post',
 	'river:create:object:wallpost' => "%s posted to %s wall",
+	'river:comments:wallposts:more' => "+%s more comments",
 );
 
 add_translation('en',$english);

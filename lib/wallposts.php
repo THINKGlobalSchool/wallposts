@@ -102,6 +102,28 @@ function wallposts_create_post($text, $user_guid, $access_id, $container_guid, $
 		// 	'origin' => 'thewire',
 		// );
 		// elgg_trigger_plugin_hook('status', 'user', $params);
+
+		$logged_in_user = elgg_get_logged_in_user_entity();
+
+		// If user isn't posting to their own wall
+		if ($post->container_guid != $logged_in_user->guid) {
+			$container = get_entity($post->container_guid);
+
+			// Can only notify users..
+			if (elgg_instanceof($container, 'user')) {
+				notify_user($container->guid,
+					$logged_in_user->guid,
+					elgg_echo('wallposts:create:email:subject'),
+					elgg_echo('wallposts:create:email:body', array(
+						$logged_in_user->name,
+						$post->description,
+						$container->getURL(),
+						$logged_in_user->name,
+						$logged_in_user->getURL()
+					))
+				);
+			}
+		}
 	}
 	
 	return $guid;

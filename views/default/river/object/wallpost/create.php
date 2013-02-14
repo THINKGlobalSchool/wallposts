@@ -36,11 +36,11 @@ if ($subject->guid == $object->container_guid) {
 	));
 }
 
-
 $summary = elgg_echo("river:create:object:wallpost", array($subject_link, $wall_text));
 
 echo elgg_view('river/elements/layout', array(
 	'item' => $vars['item'],
 	'message' => $excerpt,
 	'summary' => $summary,
+	//'responses' => elgg_view('wallposts/responses', array('item' => $vars['item'])),
 ));
