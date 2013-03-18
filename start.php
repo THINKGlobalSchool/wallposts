@@ -46,7 +46,7 @@ function wallposts_init() {
 	elgg_register_plugin_hook_handler('register', 'menu:river', 'wallposts_river_menu_setup');
 
 	// Extend ajax page handler
-	elgg_register_plugin_hook_handler('route', 'ajax', 'wallposts_route_ajax_handler');
+	//elgg_register_plugin_hook_handler('route', 'ajax', 'wallposts_route_ajax_handler');
 
 	// Hook into annotataion event
 	elgg_register_event_handler('create', 'annotation', 'wallposts_annotation_create_handler');
