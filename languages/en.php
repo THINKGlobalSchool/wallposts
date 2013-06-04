@@ -63,6 +63,7 @@ To view %s's profile, click here:
 
 You cannot reply to this email.",
 
+	'mentions:notification_types:object:wallpost' => 'a wall post',
 
 	// Messages
 	'wallposts:success:create' => 'Successfully posted to %s\'s wall',

@@ -51,6 +51,9 @@ function wallposts_init() {
 	// Hook into annotataion event
 	elgg_register_event_handler('create', 'annotation', 'wallposts_annotation_create_handler');
 
+	// override the default url to view a wall post object
+	elgg_register_entity_url_handler('object', 'wallpost', 'wallposts_url_handler');
+
 	// Register actions
 	$action_base = elgg_get_plugins_path() . 'wallposts/actions/wallposts';
 	elgg_register_action("wallposts/add", "$action_base/add.php");
@@ -222,3 +225,14 @@ function wallposts_annotation_create_handler($event, $type, $object) {
 	return TRUE;
 }
 
+
+/**
+ * Format and return the URL for wallposts.
+ *
+ * @param ElggObject $entity wall post object
+ * @return string URL of wall post (the container guid's profile).
+ */
+function wallposts_url_handler($entity) {
+	$container = $entity->getContainerEntity();
+	return $container->getURL();
+}
