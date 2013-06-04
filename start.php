@@ -61,6 +61,9 @@ function wallposts_init() {
 	elgg_register_ajax_view('wallposts/list');
 	elgg_register_ajax_view('wallposts/activity');
 	elgg_register_ajax_view('river/elements/responses');
+
+	// Register for search.
+	elgg_register_entity_type('object', 'wallpost');
 }
 
 /**

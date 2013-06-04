@@ -12,6 +12,7 @@
 
 $english = array(
 	// General/Entity
+	'item:object:wallpost' => 'Wall Posts',
 	'wallposts' => 'Wall Posts',
 	'wallposts:post' => 'Post',
 	'wallposts:for' => "For: ",
