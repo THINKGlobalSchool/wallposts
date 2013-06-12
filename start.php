@@ -176,6 +176,10 @@ function wallposts_annotation_create_handler($event, $type, $object) {
 	$entity = get_entity($object->entity_guid);
 
 	if (elgg_instanceof($entity, 'object', 'wallpost')) {
+		if ($object->value == 'likes') {
+			return TRUE;
+		}
+
 		$user = elgg_get_logged_in_user_entity();
 
 		// Send out commented annotation to owner
