@@ -79,6 +79,10 @@ You cannot reply to this email.",
 	'river:comment:object:wallpost' => '%s commented on a wall post',
 	'river:create:object:wallpost' => "%s posted to %s",
 	'river:comments:wallposts:more' => "+%s more comments",
+
+	// Widgets
+	'wallposts:widget:wall' => 'Wall Posts Profile Widget',
+	'wallposts:widget:activity' => 'Wall Posts Activity Widget',
 );
 
 add_translation('en',$english);

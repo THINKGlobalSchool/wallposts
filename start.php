@@ -45,6 +45,9 @@ function wallposts_init() {
 	// Modify river menu for wallposts
 	elgg_register_plugin_hook_handler('register', 'menu:river', 'wallposts_river_menu_setup');
 
+	// Make roleprofilewidgets dynamic
+	elgg_register_plugin_hook_handler('get_dynamic_handlers', 'role_widgets', 'wallposts_register_dynamic_handlers');
+
 	// Extend ajax page handler
 	//elgg_register_plugin_hook_handler('route', 'ajax', 'wallposts_route_ajax_handler');
 
@@ -67,6 +70,12 @@ function wallposts_init() {
 
 	// Register for search.
 	elgg_register_entity_type('object', 'wallpost');
+
+	// Register widget
+	if (elgg_is_active_plugin('roles')) {
+		elgg_register_widget_type('roles_wall', elgg_echo('wallposts:widget:wall'), elgg_echo('wallposts:widget:wall'), 'roleprofilewidget');
+		elgg_register_widget_type('roles_activity', elgg_echo('wallposts:widget:activity'), elgg_echo('wallposts:widget:activity'), 'roleprofilewidget');
+	}
 }
 
 /**
@@ -144,6 +153,23 @@ function wallposts_river_menu_setup($hook, $type, $value, $params) {
 	}
 
 	return $value;
+}
+
+/**
+ * Register roleprofilewidgets as dynamic handlers to provide individual titles
+ * for user widgets
+ *
+ * @param string $hook
+ * @param string $type
+ * @param bool   $return
+ * @param array  $params
+ * @return mixed
+ */
+function wallposts_register_dynamic_handlers($hook, $type, $return, $params) {
+	$user = $params['user'];
+	$return['roles_wall'] = elgg_echo('wallposts:label:ownerposts', array($user->name));
+	$return['roles_activity'] = elgg_echo('wallposts:label:owneractivity', array($user->name));	
+	return $return;
 }
 
 
