@@ -35,7 +35,7 @@ $params = array(
 $posts_content .= elgg_list_river($params);
 
 if (!$posts_content) {
-	$posts_content = elgg_echo('wallposts:none', array($owner->name));
+	$posts_content = "<div class='mal'><center><strong>" . elgg_echo('wallposts:none', array($owner->name)) . "</strong></center></div>";
 }
 
 echo "<div class='_wp-ajax-container' id='_wp-posts-content'>{$posts_content}</div>"; 
