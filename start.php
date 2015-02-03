@@ -5,7 +5,7 @@
  * @package WallPosts
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
  * @author Jeff Tilson
- * @copyright THINK Global School 2010 - 2013
+ * @copyright THINK Global School 2010 - 2015
  * @link http://www.thinkglobalschool.com/
  *
  * OVERRIDES:
@@ -26,7 +26,6 @@ function wallposts_init() {
 
 	// Register JS Lib
 	$js = elgg_get_simplecache_url('js', 'wallposts/wallposts');
-	elgg_register_simplecache_view('js/wallposts/wallposts');
 	elgg_register_js('elgg.wallposts', $js);
 	elgg_load_js('elgg.wallposts');
 
@@ -55,7 +54,7 @@ function wallposts_init() {
 	elgg_register_event_handler('create', 'annotation', 'wallposts_annotation_create_handler');
 
 	// override the default url to view a wall post object
-	elgg_register_entity_url_handler('object', 'wallpost', 'wallposts_url_handler');
+	elgg_register_plugin_hook_handler('entity:url', 'object', 'wallposts_url_handler');
 
 	// Register actions
 	$action_base = elgg_get_plugins_path() . 'wallposts/actions/wallposts';
@@ -255,14 +254,24 @@ function wallposts_annotation_create_handler($event, $type, $object) {
 	return TRUE;
 }
 
-
 /**
- * Format and return the URL for wallposts.
+ * Returns the URL from a wallpost entity
  *
- * @param ElggObject $entity wall post object
- * @return string URL of wall post (the container guid's profile).
+ * @param string $hook   'entity:url'
+ * @param string $type   'object'
+ * @param string $url    The current URL
+ * @param array  $params Hook parameters
+ * @return string
  */
-function wallposts_url_handler($entity) {
+function wallposts_url_handler($hook, $type, $url, $params) {
+	$entity = $params['entity'];
+
+	// Check that the entity is a wallpost object
+	if (!elgg_instanceof($entity, 'object', 'wallpost')) {
+		return;
+	}
+
+	// Show the user profile
 	$container = $entity->getContainerEntity();
 	return $container->getURL();
 }
