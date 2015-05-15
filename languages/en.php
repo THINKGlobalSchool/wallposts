@@ -6,7 +6,7 @@
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
  * @author Jeff Tilson
  * @copyright THINK Global School 2010 - 2015
- * @link http://www.thinkglobalschool.com/
+ * @link http://www.thinkglobalschool.org/
  *
  */
 
@@ -81,6 +81,6 @@ You cannot reply to this email.",
 	'river:comments:wallposts:more' => "+%s more comments",
 
 	// Widgets
-	'wallposts:widget:wall' => 'Wall Posts Profile Widget',
-	'wallposts:widget:activity' => 'Wall Posts Activity Widget',
+	'wallposts:widget:wall' => 'Wall Post',
+	'wallposts:widget:activity' => 'Activity',
 );

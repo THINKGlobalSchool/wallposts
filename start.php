@@ -6,7 +6,7 @@
  * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
  * @author Jeff Tilson
  * @copyright THINK Global School 2010 - 2015
- * @link http://www.thinkglobalschool.com/
+ * @link http://www.thinkglobalschool.org/
  *
  * OVERRIDES:
  * 	- profile/tabs/activity
@@ -72,8 +72,8 @@ function wallposts_init() {
 
 	// Register widget
 	if (elgg_is_active_plugin('roles')) {
-		elgg_register_widget_type('roles_wall', elgg_echo('wallposts:widget:wall'), elgg_echo('wallposts:widget:wall'), 'roleprofilewidget');
-		elgg_register_widget_type('roles_activity', elgg_echo('wallposts:widget:activity'), elgg_echo('wallposts:widget:activity'), 'roleprofilewidget');
+		elgg_register_widget_type('roles_wall', elgg_echo('wallposts:widget:wall'), elgg_echo('wallposts:widget:wall'), array('roleprofilewidget'));
+		elgg_register_widget_type('roles_activity', elgg_echo('wallposts:widget:activity'), elgg_echo('wallposts:widget:activity'), array('roleprofilewidget'));
 	}
 }
 

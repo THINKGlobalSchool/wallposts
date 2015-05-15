@@ -1,91 +1,75 @@
 <?php
 /**
- * Elgg Wall Posts Custom Responses
+ * River item footer
  *
- * @package WallPosts
- * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
- * @author Jeff Tilson
- * @copyright THINK Global School 2010 - 2013
- * @link http://www.thinkglobalschool.com/
- *
- * @uses $vars['item']        ElggRiverItem
- * @uses $vars['entity_guid'] Optional entity guid
- * @uses $vars['offset']      Optional offset
- * @uses $vars['limit']       Optional limit
- * @uses $vars['use_form']	  Optional include the comments form (default true)
+ * @uses $vars['item'] ElggRiverItem
+ * @uses $vars['responses'] Alternate override for this item
  */
-
-
 
 // allow river views to override the response content
 $responses = elgg_extract('responses', $vars, false);
+
+$offset = elgg_extract('offset', $vars, 0);
+$limit = elgg_extract('limit', $vars, 3);
+
 if ($responses) {
 	echo $responses;
 	return true;
 }
 
-$item = elgg_extract('item', $vars);
-$offset = elgg_extract('offset', $vars, 0);
-$limit = elgg_extract('limit', $vars, 3);
-$use_form = elgg_extract('use_form', $vars, TRUE);
+$item = $vars['item'];
+/* @var ElggRiverItem $item */
 
 if (!$vars['item']) {
-	$entity_guid = elgg_extract('entity_guid', $vars);
+	$entity_guid = get_input('entity_guid');
 	$object = get_entity($entity_guid);
 } else {
 	$object = $item->getObjectEntity();	
+}
 
-	// annotations do not have comments
-	if ($item->annotation_id != 0 || !$object) {
-		return true;
-	}
+// annotations and comments do not have responses
+if ($item->annotation_id != 0 || !$object ) {
+	return true;
 }
 
 $comment_count = $object->countComments();
 
-$options = array(
-	'guid' => $object->getGUID(),
-	'annotation_name' => 'generic_comment',
-	'limit' => $limit,
-	'offset' => $offset,
-	'order_by' => 'n_table.time_created desc'
-);
+if ($comment_count) {
+	$comments = elgg_get_entities(array(
+		'type' => 'object',
+		'subtype' => 'comment',
+		'container_guid' => $object->getGUID(),
+		'limit' => $limit,
+		'offset' => $offset,
+		'order_by' => 'e.time_created desc',
+		'distinct' => false,
+	));
 
-$comments = elgg_get_annotations($options);
-
-if ($comments) {
 	// why is this reversing it? because we're asking for the 3 latest
 	// comments by sorting desc and limiting by 3, but we want to display
 	// these comments with the latest at the bottom.
 	$comments = array_reverse($comments);
 
-?>
-	<span class="elgg-river-comments-tab"><?php echo elgg_echo('comments'); ?></span>
-
-<?php
-
+	echo elgg_view_entity_list($comments, array('list_class' => 'elgg-river-comments'));
 	if ($comment_count > (count($comments) + $offset)) {
 		$num_more_comments = $comment_count - (count($comments) + $offset);
 
 		$next_offset = $limit + $offset;
 
-		$href = elgg_get_site_url() . "ajax/view/river/elements/responses?entity_guid={$object->guid}&limit=5&offset={$next_offset}";
+		$url = elgg_get_site_url() . "ajax/view/river/elements/responses?entity_guid={$object->guid}&limit=5&offset={$next_offset}";
 
 		$params = array(
-			'href' => $href,
-			'text' => elgg_echo('river:comments:wallposts:more', array($num_more_comments)),
+			'href' => $url,
+			'text' => elgg_echo('river:comments:more', array($num_more_comments)),
 			'is_trusted' => true,
 			'class' => '_wp-load-more-comments'
 		);
 		$link = elgg_view('output/url', $params);
 		echo "<div class=\"elgg-river-more wallposts-river-more\">$link</div>";
 	}
-	echo elgg_view_annotation_list($comments, array('list_class' => 'elgg-river-comments'));
 }
 
-if ($use_form) {
-	// inline comment form
-	$form_vars = array('id' => "comments-add-{$object->getGUID()}", 'class' => 'hidden');
-	$body_vars = array('entity' => $object, 'inline' => true);
-	echo elgg_view_form('comments/add', $form_vars, $body_vars);
-}
+// inline comment form
+$form_vars = array('id' => "comments-add-{$object->getGUID()}", 'class' => 'hidden');
+$body_vars = array('entity' => $object, 'inline' => true);
+echo elgg_view_form('comment/save', $form_vars, $body_vars);

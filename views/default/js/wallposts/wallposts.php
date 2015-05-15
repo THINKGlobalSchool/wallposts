@@ -80,7 +80,7 @@ elgg.wallposts.init = function() {
 	});
 
 	// Delegate a submit handler for river comment submit
-	$(document).delegate('.elgg-river-responses form.elgg-form-comments-add', 'submit', function(event) {
+	$(document).delegate('.elgg-river-responses form.elgg-form-comment-save', 'submit', function(event) {
 		var $_this = $(this);
 
 		var $submit = $(this).find('input[type=submit]');
